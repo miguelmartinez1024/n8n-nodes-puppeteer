@@ -61,7 +61,7 @@ export const nodeDescription: INodeTypeDescription = {
 			name: 'url',
 			type: 'string',
 			required: true,
-			default: '',
+			default: '$fromAI("url", "The URL to visit or process", "string")',
 			displayOptions: {
 				show: {
 					operation: ['getPageContent', 'getScreenshot', 'getPDF'],
@@ -106,8 +106,7 @@ export const nodeDescription: INodeTypeDescription = {
 				editorLanguage: 'javaScript',
 			},
 			required: true,
-			default:
-				'// Navigate to an IP lookup service\nawait $page.goto(\'https://httpbin.org/ip\');\n\n// Extract the IP address from the page content\nconst ipData = await $page.evaluate(() => {\n    const response = document.body.innerText;\n    const parsed = JSON.parse(response);\n    return parsed.origin;  // Extract the \'origin\' field, which typically contains the IP address\n});\n\nconsole.log("Hello, world!");\n\nconsole.log("IP Address", ipData);\n\n// Return the result in the required format\nreturn [{ ip: ipData, ...$json }];',
+			default:'$fromAI("query", "The task or query to execute with Puppeteer", "string")',
 			description:
 				'JavaScript code to execute with Puppeteer. You have access to the $browser and $page objects, which represent the Puppeteer browser and page.',
 			noDataExpression: false,
